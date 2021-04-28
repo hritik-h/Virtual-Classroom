@@ -33,7 +33,7 @@ function App() {
                     </Grid>
                 </Container>
             </Grow>
-            <Form/>
+            <Form />
         </Container>
     )
 }
