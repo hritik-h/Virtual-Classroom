@@ -72,7 +72,7 @@ router.get('/posts', async (req, res) => {
     console.log(allPosts);
 })
 
-router.post('/posts', async (req, res) => {
+router.post('/post', async (req, res) => {
     const newPost = new Post({
         creator: req.body.creator,
         title: req.body.title,
@@ -85,6 +85,38 @@ router.post('/posts', async (req, res) => {
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
+})
+
+router.put('/like/:id', async (req, res) => {
+    referencePost = await Post.findById(req.params.id)
+    if (referencePost) {
+        try {
+            referencePost.likeCount = referencePost.likeCount + 1
+            await referencePost.save()
+            res.status(202).json(referencePost)
+        }
+        catch (err) {
+            console.log(err);
+            res.status(409).json({ message: err.message })
+        }
+
+    }
+    else {
+        res.status(422).json({ message: "Post not Found" })
+    }
+})
+
+router.delete('/post/:id', async (req, res) => {
+    Post.deleteOne({ _id: req.params.id }, err => {
+        if (err) {
+            console.log(err.message)
+            res.status(422).json({ message: err.message })
+        }
+        else {
+            console.log("Successfully Deleted");
+            res.status(202).json({ message: `Post with ID : ${req.params.id} has been deleted successfully` })
+        }
+    })
 })
 
 module.exports = router
