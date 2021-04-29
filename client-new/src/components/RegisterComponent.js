@@ -69,6 +69,8 @@ export default function Register() {
         axios.post('http://localhost:5000/register', data)
             .then(res => {
                 console.log(res.data);
+                localStorage.clear()
+                localStorage.setItem('_id', res.data._id)
                 return history.push('/home')
             })
             .catch(err => setErrorMsg(err.response.data.message))

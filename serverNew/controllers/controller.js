@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
             })
 
             await newUser.save()
-            res.status(201).json({ message: "User Registered Successfully" })
+            res.status(201).json(newUser)
         }
 
     } catch (err) {
@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
             const isMatch = await bcrypt.compare(password, userLogin.password)
 
             if (isMatch) {
-                res.status(202).json({ message: "Login Successful" })
+                res.status(202).json(userLogin)
             }
             else {
                 res.status(400).json({ message: "Invalid Credentials" })
