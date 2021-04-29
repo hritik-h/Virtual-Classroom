@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
 
     try {
         if (!req.body.name || !req.body.email || !req.body.password) {
-            return res.status(422).json({ error: "Plz fill all the fields" })
+            res.status(422).json({ message: "Plz fill all the fields" })
         }
         else if (await User.findOne({ email: req.body.email })) {
             res.status(422).json({ message: "User already registered. Pls try a different email id." })
