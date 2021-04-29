@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+import { Container, AppBar, Typography, Grow, Grid, Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom'
-
+import { Redirect, NavLink } from 'react-router-dom'
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import { getPosts } from './actions/posts';
 import useStyles from './styles';
 import memories from './components/images/memories.png';
+import './button.css';
 
 const Home = () => {
   
@@ -23,11 +23,16 @@ const Home = () => {
     console.log("User not Logged In");
     return (<Redirect to='/login' />)
 }
+  const logout = () =>{
+    console.log("User not Logged In");
+    localStorage.clear();
+  }
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">Tasks</Typography>
         <img className={classes.image} src={memories} alt="icon" height="60" />
+        <NavLink to='/login' > <Button className='logout-button' variant="contained" color="secondary" size="small" onClick={logout} > Logout </Button></NavLink>
       </AppBar>
       <Grow in>
         <Container>
