@@ -11,10 +11,6 @@ const PostsSchema = mongoose.Schema({
     },
     message: String,
     tags: [String],
-    selectedFile: {
-        data: Buffer,
-        contentType: String
-    },
     likeCount: {
         type: Number,
         default: 0

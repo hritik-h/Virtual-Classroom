@@ -20,7 +20,6 @@ const UserSchema = mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now,
-        timezone: 'Asia/Kolkata'
     }
 }, {
     timestamps: true
